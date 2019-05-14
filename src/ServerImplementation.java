@@ -2,17 +2,17 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Vector;
 
-
 public class ServerImplementation extends UnicastRemoteObject
         implements ServerInterface {
 
-    private Vector<ClientInterface> clientList;
-    ServerImplementation() throws  RemoteException {
+    private Vector<ClientInterface> clientList = new Vector<>();
+
+    ServerImplementation() throws RemoteException {
         super();
     }
 
     @Override
-    public String greetings() throws RemoteException {
+    public String greetings() {
         return "hello";
     }
 
@@ -27,9 +27,8 @@ public class ServerImplementation extends UnicastRemoteObject
     }
 
     @Override
-    public synchronized void unregisterForCallback(ClientInterface client)
-            throws RemoteException {
-        if(clientList.removeElement(client)) {
+    public synchronized void unregisterForCallback(ClientInterface client) {
+        if (clientList.removeElement(client)) {
             System.out.println("Unregistered: " + client);
         } else {
             System.out.println("Did not unregister: " + client);
@@ -39,7 +38,7 @@ public class ServerImplementation extends UnicastRemoteObject
     @Override
     public synchronized void broadcast(String message) throws RemoteException {
         System.out.println("Broadcast...");
-        for(int i = 0; i < clientList.size(); i++) {
+        for (int i = 0; i < clientList.size(); i++) {
             ClientInterface client = clientList.elementAt(i);
             client.receiveMessage(message);
         }
@@ -47,11 +46,10 @@ public class ServerImplementation extends UnicastRemoteObject
 
     private void callbacks() throws RemoteException {
         System.out.println("Callbacks...");
-        for(int i = 0; i < clientList.size(); i++) {
+        for (int i = 0; i < clientList.size(); i++) {
             ClientInterface client = clientList.elementAt(i);
             System.out.println(client.callback("Number of registered clients="
-                + clientList.size()));
+                    + clientList.size()));
         }
     }
 }
-

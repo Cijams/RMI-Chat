@@ -7,7 +7,7 @@ public class Server {
         try {
             if (args.length == 1) {
                 port = Integer.parseInt(args[0]);
-                if(port < 5001 || port > 65535)
+                if (port < 5001 || port > 65535)
                     throw new Exception();
             } else {
                 throw new Exception();
@@ -27,6 +27,7 @@ public class Server {
             System.exit(-1);
         }
     }
+
     private static void startRegistry(int port) throws RemoteException {
         try {
             Registry registry = LocateRegistry.getRegistry(port);
