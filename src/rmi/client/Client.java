@@ -1,3 +1,6 @@
+package rmi.client;
+import rmi.server.*;
+
 import java.rmi.*;
 import java.util.*;
 import java.net.*;
@@ -13,7 +16,7 @@ public class Client {
             } else
                 throw new Exception();
         } catch (Exception e) {
-            System.err.println("usage: java Client serverIP port");
+            System.err.println("usage: java rmi.client.Client serverIP port");
             System.exit(-1);
         }
         String serverIP = args[0];

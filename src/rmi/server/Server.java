@@ -1,3 +1,5 @@
+package rmi.server;
+
 import java.rmi.*;
 import java.rmi.registry.*;
 
@@ -13,7 +15,7 @@ public class Server {
                 throw new Exception();
             }
         } catch (Exception e) {
-            System.err.println("usage: java Server port");
+            System.err.println("usage: java rmi.server.Server port");
             System.exit(-1);
         }
 
@@ -21,7 +23,7 @@ public class Server {
             startRegistry(port);
             ServerImplementation serverObject = new ServerImplementation();
             Naming.rebind("rmi://localhost:" + port + "/server", serverObject);
-            System.out.println("Server ready.");
+            System.out.println("rmi.server.Server ready.");
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);

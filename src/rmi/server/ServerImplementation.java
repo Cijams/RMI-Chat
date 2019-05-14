@@ -1,3 +1,7 @@
+package rmi.server;
+
+import rmi.client.ClientInterface;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Vector;
